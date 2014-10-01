@@ -1,6 +1,18 @@
 from Tkinter import *
 from bcurves import ThreePointCurve
 
+class bezieranimation:
+    def __init__(self, **kwargs):
+        self.pointA = kwargs.get('pointA', [0,0])
+        self.pointB = kwargs.get('pointB', [100,0])
+        self.pointC = kwargs.get('pointC',[100,100])
+        self.pointD = kwargs.get('pointD', [0,100])
+
+        self.setpsize = kwargs.get('stepsize', 0.04)
+        self.time = 0
+
+
+
 master = Tk()
 
 canvas = Canvas(master, width = 200, height = 200)
