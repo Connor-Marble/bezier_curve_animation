@@ -25,6 +25,16 @@ class FourPointCurve:
 
         return curvepoint
         
+    def getedgepoints(self, t):
+        edgepoints = []
+        
+        firstpoint = self.lerp(self.pointA, self.pointB, t)
+        secondpoint = self.lerp(self.pointC, self.pointD, t)
+
+        edgepoints.append(firstpoint)
+        edgepoints.append(secondpoint)
+
+        return edgepoints
 
 class ThreePointCurve:
 
@@ -33,3 +43,7 @@ class ThreePointCurve:
 
     def getcurvepoint(self, t):
         return self.curve.getcurvepoint(t)
+
+    def getedgepoints(self, t):
+        return self.curve.getedgepoints(t)
+
