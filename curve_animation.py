@@ -1,6 +1,6 @@
 from Tkinter import *
 from bcurves import ThreePointCurve, FourPointCurve
-
+import time
 
 class BezierAnimation:
     def __init__(self, canvas, **kwargs):
@@ -69,6 +69,13 @@ class BezierAnimation:
                                 edgepoints[1][0],
                                 edgepoints[1][1])
 
+    def drawcurvepoint(self):
+        curvepoint = self.curve.getcurvepoint(self.step * self.stepsize)
+        self.canvas .create_rectangle(curvepoint[0]-5,
+                                      curvepoint[1]-5,
+                                      curvepoint[0]+5,
+                                      curvepoint[1]+5)
+
 
 master = Tk()
 
@@ -81,11 +88,13 @@ curve = BezierAnimation(canvas,
                         pointA=[5, 5],
                         pointB=[5, 395],
                         pointC=[395, 395])
-curve.step = 15
 
+curve.step = 15
 curve.drawcurve()
 curve.drawedgepoints()
 curve.drawoutline()
 curve.drawcurveline()
+curve.drawcurvepoint()
+    
 
 canvas.mainloop()
