@@ -2,7 +2,7 @@ from Tkinter import *
 from bcurves import ThreePointCurve, FourPointCurve
 
 
-class bezieranimation:
+class BezierAnimation:
     def __init__(self, canvas, **kwargs):
         self.pointA = kwargs.get('pointA', [0, 0])
         self.pointB = kwargs.get('pointB', [100, 0])
@@ -21,17 +21,17 @@ class bezieranimation:
         self.canvas = canvas
 
     def drawcurve(self):
-        curvepoints = []
+        curve_points = []
 
         for i in range(self.step+1):
-            curvepoints.append(self.curve.getcurvepoint(self.stepsize * i))
+            curve_points.append(self.curve.getcurvepoint(self.stepsize * i))
 
-        for i in range(len(curvepoints)-1):
+        for i in range(len(curve_points)-1):
             self.canvas.create_line(
-                curvepoints[i][0],
-                curvepoints[i][1],
-                curvepoints[i+1][0],
-                curvepoints[i+1][1])
+                curve_points[i][0],
+                curve_points[i][1],
+                curve_points[i+1][0],
+                curve_points[i+1][1])
 
 master = Tk()
 
@@ -40,7 +40,7 @@ canvas = Canvas(master, width=200, height=200)
 canvas.pack()
 
 
-curve = bezieranimation(canvas)
+curve = BezierAnimation(canvas)
 curve.step = 30
 
 curve.drawcurve()
