@@ -4,7 +4,7 @@ from bcurves import ThreePointCurve, FourPointCurve
 
 class BezierAnimation:
     def __init__(self, canvas, **kwargs):
-        self.pointA = kwargs.get('pointA', [0, 0])
+        self.pointA = kwargs.get('pointA', [0, 50])
         self.pointB = kwargs.get('pointB', [100, 0])
         self.pointC = kwargs.get('pointC', [100, 100])
         self.pointD = kwargs.get('pointD', None)
@@ -40,7 +40,7 @@ class BezierAnimation:
                                 self.pointB[0],
                                 self.pointB[1])
 
-        if pointD is None:
+        if self.pointD is None:
             self.canvas.create_line(self.pointB[0],
                                     self.pointB[1],
                                     self.pointC[0],
@@ -52,15 +52,40 @@ class BezierAnimation:
                                     self.pointD[0],
                                     self.pointD[1])
 
+    def drawedgepoints(self):
+        edgepoints = self.curve.getedgepoints(self.step * self.stepsize)
+
+        for point in edgepoints:
+            self.canvas.create_rectangle(point[0]-5,
+                                         point[1]-5,
+                                         point[0]+5,
+                                         point[1]+5)
+
+    def drawcurveline(self):
+        edgepoints = self.curve.getedgepoints(self.step * self.stepsize)
+        
+        self.canvas.create_line(edgepoints[0][0],
+                                edgepoints[0][1],
+                                edgepoints[1][0],
+                                edgepoints[1][1])
+
+
 master = Tk()
 
-canvas = Canvas(master, width=200, height=200)
+canvas = Canvas(master, width=400, height=400)
 
 canvas.pack()
 
 
-curve = BezierAnimation(canvas)
-curve.step = 30
+curve = BezierAnimation(canvas,
+                        pointA=[5, 5],
+                        pointB=[5, 395],
+                        pointC=[395, 395])
+curve.step = 15
 
 curve.drawcurve()
+curve.drawedgepoints()
+curve.drawoutline()
+curve.drawcurveline()
+
 canvas.mainloop()
