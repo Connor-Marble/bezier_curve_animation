@@ -59,7 +59,8 @@ class BezierAnimation:
             self.canvas.create_rectangle(point[0]-5,
                                          point[1]-5,
                                          point[0]+5,
-                                         point[1]+5)
+                                         point[1]+5,
+                                         outline='blue')
 
     def drawcurveline(self):
         edgepoints = self.curve.getedgepoints(self.step * self.stepsize)
@@ -67,7 +68,8 @@ class BezierAnimation:
         self.canvas.create_line(edgepoints[0][0],
                                 edgepoints[0][1],
                                 edgepoints[1][0],
-                                edgepoints[1][1])
+                                edgepoints[1][1],
+                                fill = 'red')
 
     def drawcurvepoint(self):
         curvepoint = self.curve.getcurvepoint(self.step * self.stepsize)
@@ -77,24 +79,4 @@ class BezierAnimation:
                                       curvepoint[1]+5)
 
 
-master = Tk()
 
-canvas = Canvas(master, width=400, height=400)
-
-canvas.pack()
-
-
-curve = BezierAnimation(canvas,
-                        pointA=[5, 5],
-                        pointB=[5, 395],
-                        pointC=[395, 395])
-
-curve.step = 15
-curve.drawcurve()
-curve.drawedgepoints()
-curve.drawoutline()
-curve.drawcurveline()
-curve.drawcurvepoint()
-    
-
-canvas.mainloop()
