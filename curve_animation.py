@@ -20,7 +20,7 @@ class BezierAnimation:
         self.step = 0
         self.canvas = canvas
 
-    def drawcurve(self):
+    def drawcurve(self, **kwargs):
         curve_points = []
 
         for i in range(self.step+1):
@@ -31,28 +31,32 @@ class BezierAnimation:
                 curve_points[i][0],
                 curve_points[i][1],
                 curve_points[i+1][0],
-                curve_points[i+1][1])
+                curve_points[i+1][1],
+                **kwargs)
 
-    def drawoutline(self):
+    def drawoutline(self, **kwargs):
         
         self.canvas.create_line(self.pointA[0],
                                 self.pointA[1],
                                 self.pointB[0],
-                                self.pointB[1])
+                                self.pointB[1],
+                                **kwargs)
 
         if self.pointD is None:
             self.canvas.create_line(self.pointB[0],
                                     self.pointB[1],
                                     self.pointC[0],
-                                    self.pointC[1])
+                                    self.pointC[1],
+                                    **kwargs)
 
         else:
             self.canvas.create_line(self.pointC[0],
                                     self.pointC[1],
                                     self.pointD[0],
-                                    self.pointD[1])
+                                    self.pointD[1],
+                                    **kwargs)
 
-    def drawedgepoints(self):
+    def drawedgepoints(self, **kwargs):
         edgepoints = self.curve.getedgepoints(self.step * self.stepsize)
 
         for point in edgepoints:
@@ -60,23 +64,24 @@ class BezierAnimation:
                                          point[1]-5,
                                          point[0]+5,
                                          point[1]+5,
-                                         outline='blue')
+                                         **kwargs)
 
-    def drawcurveline(self):
+    def drawcurveline(self, **kwargs):
         edgepoints = self.curve.getedgepoints(self.step * self.stepsize)
         
         self.canvas.create_line(edgepoints[0][0],
                                 edgepoints[0][1],
                                 edgepoints[1][0],
                                 edgepoints[1][1],
-                                fill = 'red')
+                                **kwargs)
 
-    def drawcurvepoint(self):
+    def drawcurvepoint(self, **kwargs):
         curvepoint = self.curve.getcurvepoint(self.step * self.stepsize)
         self.canvas .create_rectangle(curvepoint[0]-5,
                                       curvepoint[1]-5,
                                       curvepoint[0]+5,
-                                      curvepoint[1]+5)
+                                      curvepoint[1]+5,
+                                      **kwargs)
 
 
 

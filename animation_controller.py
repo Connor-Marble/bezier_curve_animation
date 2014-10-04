@@ -17,7 +17,7 @@ class SingleAnimation:
                                 pointA=[5, 5],
                                 pointB=[5, 395],
                                    pointC=[395, 395],
-                                   steps=60)
+                                   steps=30)
         
         thread.start_new(self.animateloop,(curve, 2))
         
@@ -28,16 +28,16 @@ class SingleAnimation:
 
         for i in range(int(stepcount)):
             curve.step = i
-            curve.drawcurve()
+            curve.drawcurve(fill='green')
             curve.drawedgepoints()
             curve.drawoutline()
             curve.drawcurveline()
             curve.drawcurvepoint()
         
             time.sleep(seconds/stepcount)
-            self.canvas.delete("all")
-        thread.start_new(self.animateloop,(curve, 2))
 
+        thread.start_new(self.animateloop,(curve, 2))
+        self.canvas.delete("all")
 
 if __name__ == '__main__':
     s_anim = SingleAnimation()
