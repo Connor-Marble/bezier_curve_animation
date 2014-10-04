@@ -19,7 +19,7 @@ class FourPointCurve:
         return result
 
     def getcurvepoint(self, t):
-        ABpoint = self.lerp(self.pointA, self.pointC, t)
+        ABpoint = self.lerp(self.pointA, self.pointB, t)
         CDpoint = self.lerp(self.pointC, self.pointD, t)
         curvepoint = self.lerp(ABpoint, CDpoint, t)
 
