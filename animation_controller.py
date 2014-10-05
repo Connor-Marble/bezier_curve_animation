@@ -4,26 +4,26 @@ import Tkinter
 import thread
 
 class SingleAnimation:
-    def __init__(self):
+    def __init__(self, **kwargs):
         master = Tkinter.Tk()
         self.canvas = Tkinter.Canvas(master, width=400, height=400)
-        animation = CA.BezierAnimation(self.canvas)
-
 
         self.canvas.pack()
 
 
         curve = CA.BezierAnimation(self.canvas,
-                                pointA=[5, 5],
-                                pointB=[5, 395],
-                                   pointC=[395, 395],
-                                   steps=30)
-        
-        thread.start_new(self.animateloop,(curve, 2))
+                                pointA=[200, 5],
+                                pointB=[200, 395],
+                                pointC=[5, 200],
+                                pointD=[395, 200],
+                                   steps=60,
+                                   thickness=2)
+
+        thread.start_new(self.animateloop,(curve, 2, kwargs))
         
         self.canvas.mainloop()
 
-    def animateloop(self, curve, seconds):
+    def animateloop(self, curve, seconds, kwargs):
         stepcount = 1/curve.stepsize
 
         for i in range(int(stepcount)):
@@ -36,8 +36,16 @@ class SingleAnimation:
         
             time.sleep(seconds/stepcount)
 
+            if kwargs.get('persist',False) is False:
+                self.canvas.delete("all")
+
+        self.canvas.delete("all")
+        thread.start_new(self.animateloop,(curve, 2, kwargs))
+
         thread.start_new(self.animateloop,(curve, 2))
         self.canvas.delete("all")
 
 if __name__ == '__main__':
-    s_anim = SingleAnimation()
+    s_anim = SingleAnimation(persist=False)
+
+
