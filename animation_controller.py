@@ -16,7 +16,8 @@ class SingleAnimation:
                                 pointB=[200, 395],
                                 pointC=[5, 200],
                                 pointD=[395, 200],
-                                steps=60)
+                                   steps=60,
+                                   thickness=2)
 
         thread.start_new(self.animateloop,(curve, 2, kwargs))
         

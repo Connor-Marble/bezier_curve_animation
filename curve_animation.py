@@ -19,6 +19,7 @@ class BezierAnimation:
         self.stepsize = 1/float(kwargs.get('steps', 30))
         self.step = 0
         self.canvas = canvas
+        self.thickness = kwargs.get('thickness', 1) 
 
     def drawcurve(self):
         curve_points = []
@@ -31,14 +32,16 @@ class BezierAnimation:
                 curve_points[i][0],
                 curve_points[i][1],
                 curve_points[i+1][0],
-                curve_points[i+1][1])
+                curve_points[i+1][1],
+                width=self.thickness)
 
     def drawoutline(self):
         
         self.canvas.create_line(self.pointA[0],
                                 self.pointA[1],
                                 self.pointB[0],
-                                self.pointB[1])
+                                self.pointB[1],
+                                width=self.thickness)
 
         if self.pointD is None:
             self.canvas.create_line(self.pointB[0],
@@ -77,6 +80,18 @@ class BezierAnimation:
                                       curvepoint[1]-5,
                                       curvepoint[0]+5,
                                       curvepoint[1]+5)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
