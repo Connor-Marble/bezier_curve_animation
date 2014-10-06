@@ -3,7 +3,7 @@ import curve_animation as CA
 import Tkinter
 import thread
 
-class SingleAnimation:
+class CurveDrawAnimation:
     def __init__(self, **kwargs):
         master = Tkinter.Tk()
         self.canvas = Tkinter.Canvas(master, width=400, height=400)
@@ -43,6 +43,6 @@ class SingleAnimation:
 
 
 if __name__ == '__main__':
-    s_anim = SingleAnimation(persist=False)
+    s_anim = CurveDrawAnimation(persist=False)
 
 
