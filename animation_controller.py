@@ -42,6 +42,27 @@ class CurveDrawAnimation:
         thread.start_new(self.animateloop, (curve, 2, kwargs))
 
 
+Class CurveMoveAnimation:
+    def __init__(self, **kwargs):
+        master = Tkinter.Tk()
+        self.canvas = Tkinter.Canvas(master, width=400, height=400)
+
+        self.canvas.pack()
+
+        curve = CA.BezierAnimation(self.canvas,
+                                   pointA=[200, 5],
+                                   pointB=[200, 395],
+                                   pointC=[5, 200],
+                                   pointD=[395, 200],
+                                   steps=60)
+
+        thread.start_new(self.animateloop, (curve, 2, kwargs))
+        
+        self.canvas.mainloop()
+
+    def AnimatLoop(self, speed):
+        pass
+
 if __name__ == '__main__':
     s_anim = CurveDrawAnimation(persist=False)
 
